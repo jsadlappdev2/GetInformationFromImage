@@ -43,7 +43,8 @@ namespace GetInformationFromImage
     public class RootObject
     {
         public List<Category> categories { get; set; }
-        public List<Description> Descriptions { get; set; }
+        public Description description { get; set; }
+
         public string requestId { get; set; }
         public Metadata metadata { get; set; }
         public Color color { get; set; }

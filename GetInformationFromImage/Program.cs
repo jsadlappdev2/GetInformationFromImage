@@ -84,28 +84,58 @@ namespace CSHttpClientSample
                 Console.WriteLine(JsonPrettyPrint(contentString));
                 File.WriteAllText(@"C:\\Jerry Shen\\ocr_imageinfo.json", JsonPrettyPrint(contentString));
 
-                //analysis json data
+                //analysis json data and display them
+
                 var obj = DeserializeObject<RootObject>(JsonPrettyPrint(contentString));
-      
-              //  Console.WriteLine(obj.requestId);
-              //  string final_test = "";
 
-               // foreach (var desc_objall in obj.Descriptions)
-              //  {
-                 //   foreach (var cap_objall in desc_objall.captions)
-                  //  {
-                     //   foreach (var test_objall in cap_objall.text)
-                      //  {
+                //requestId      
+                Console.WriteLine(obj.requestId);
+                //captions
+                string var_captions = "";
+                var var_desc = obj.description;
+               foreach (var var_cap in var_desc.captions)
+                {
+                    foreach (var var_text in var_cap.text)
+                    {
+                        var_captions += var_text ;
+                    }
 
-                        //    final_test += test_objall.ToString() + " ";
-                      //  }
-                   
+                }
+                Console.WriteLine(var_captions);
 
-                  //  }
-             //   }
-             //   Console.WriteLine(final_test);
 
-                  //  File.WriteAllText(@"C:\\Jerry Shen\\OCRText.txt", JsonPrettyPrint(final_test));
+
+
+
+                //get categories.name
+                string final_test = "";
+               foreach (var desc_objall in obj.categories)
+                {
+                    foreach (var cap_objall in desc_objall.name)
+                  {
+                       final_test += cap_objall.ToString();        
+                   }
+               }
+               Console.WriteLine(final_test);
+
+                //get all tags.
+                string final_test2 = "";
+                var alltags = obj.description;
+                var alltags2 = alltags.tags;
+                foreach (var desc_objall in alltags2)
+                {
+                    final_test2 += desc_objall.ToString()+"\n";
+                }
+                Console.WriteLine(final_test2);
+
+                //get metadata
+                var var_metadata = obj.metadata;
+                Console.WriteLine(var_metadata.width.ToString());
+                Console.WriteLine(var_metadata.height.ToString());
+                Console.WriteLine(var_metadata.format.ToString());
+
+
+
 
 
             }
